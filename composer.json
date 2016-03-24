@@ -1,0 +1,8 @@
+{
+    "name": "marcoazn89/route-protection",
+    "autoload": {
+        "psr-4": {
+            "RouteProtection\\": "src"
+        }
+    }
+}
