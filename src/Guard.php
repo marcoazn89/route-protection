@@ -73,7 +73,7 @@ class Guard
                 return $routes[$route];
             }
 
-            if (!$regex = $this->parseRoute($route)) {
+            if (!$regex = $this->getRegex($route)) {
                 throw new \InvalidArgumentException("Route {$route} is invalid");
             }
 
