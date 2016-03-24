@@ -59,7 +59,7 @@ class Guard
 
     protected function findRoute(array $routes) {
         // Get server params
-        $serverParams = $request->getServerParams();
+        $serverParams = $this->request->getServerParams();
 
         // Get URI
         $redirectUrl = substr($serverParams['REQUEST_URI'], -1) !== '/' ? $serverParams['REQUEST_URI'].'/' : $serverParams['REQUEST_URI'];
