@@ -54,6 +54,9 @@ class Guard
     }
 
     protected function getAccessType() {
+        // Get server params
+        $serverParams = $this->request->getServerParams();
+
         return empty($serverParams['HTTP_USER_AGENT']) ? self::CURL : self::WEB;
     }
 
