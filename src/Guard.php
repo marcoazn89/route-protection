@@ -38,10 +38,7 @@ class Guard
 
     public function isRoleValid($role)
     {
-
-        if ($this->accessType === self::WEB && (empty($this->foundRoute[$role]) || in_array(self::WEB, $this->foundRoute[$role]))) {
-            return true;
-        } elseif ($this->accessType !== self::WEB && (!empty($this->foundRoute[$role]) && in_array(self::CURL, $this->foundRoute[$role]))) {
+        if (!empty($this->foundRoute[$role]) && in_array($this->accessType, $this->foundRoute[$role])) {
             return true;
         } else {
             return false;
@@ -81,9 +78,9 @@ class Guard
             }
 
             if (!empty(preg_match($regex, $redirectUrl))) {
-                $this->routes[$redirectUrl] = $this->routes[$route];
-                unset($this->routes[$route]);
-                return $routes[$route];
+                $routes[$redirectUrl] = $routes[$route];
+                unset($routes[$route]);
+                return $routes[$redirectUrl];
             }
         }
 
