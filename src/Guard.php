@@ -62,7 +62,7 @@ class Guard
         $serverParams = $this->request->getServerParams();
 
         // Get URI
-        $redirectUrl = substr($serverParams['REDIRECT_URL'], -1) !== '/' ? $serverParams['REDIRECT_URL'].'/' : $serverParams['REDIRECT_URL'];
+        $redirectUrl = substr($serverParams['REDIRECT_URI'], -1) !== '/' ? $serverParams['REDIRECT_URI'].'/' : $serverParams['REDIRECT_URI'];
 
         // If the route requested is not found in the array containing
         // routes that require authentication then there's nothing to do
