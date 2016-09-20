@@ -60,16 +60,17 @@ class Guard
     protected function findRoute(array $routes) {
         // Get server params
         $serverParams = $this->request->getServerParams();
+        $obj = $this->request->getUri();
 
-        // Get URI
-        $redirectUrl = substr($serverParams['REQUEST_URI'], -1) !== '/' ? $serverParams['REQUEST_URI'].'/' : $serverParams['REQUEST_URI'];
+        $uri = substr($obj->getPath(), 0) !== '/' ? '/' . $obj->getPath() : $obj->getPath();
+        $uri .= substr($uri, -1) !== '/' ? '/' : '';
 
         // If the route requested is not found in the array containing
         // routes that require authentication then there's nothing to do
         $requiredRoutes = array_keys($routes);
 
         foreach ($requiredRoutes as $route) {
-            if ($redirectUrl === $route) {
+            if ($uri === $route) {
                 return $routes[$route];
             }
 
@@ -77,10 +78,10 @@ class Guard
                 throw new \InvalidArgumentException("Route {$route} is invalid");
             }
 
-            if (!empty(preg_match($regex, $redirectUrl))) {
-                $routes[$redirectUrl] = $routes[$route];
+            if (!empty(preg_match($regex, $uri))) {
+                $routes[$uri] = $routes[$route];
                 unset($routes[$route]);
-                return $routes[$redirectUrl];
+                return $routes[$uri];
             }
         }
 
