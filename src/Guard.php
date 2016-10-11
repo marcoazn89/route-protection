@@ -62,7 +62,7 @@ class Guard
         $serverParams = $this->request->getServerParams();
         $obj = $this->request->getUri();
 
-        $uri = substr($obj->getPath(), 0) !== '/' ? '/' . $obj->getPath() : $obj->getPath();
+        $uri = substr($obj->getPath(), 0, 1) !== '/' ? '/' . $obj->getPath() : $obj->getPath();
         $uri .= substr($uri, -1) !== '/' ? '/' : '';
 
         // If the route requested is not found in the array containing
